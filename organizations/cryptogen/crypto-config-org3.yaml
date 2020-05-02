@@ -1,0 +1,10 @@
+PeerOrgs:
+  - Name: Org3
+    Domain: org3.msc.com
+    EnableNodeOUs: true
+    Template:
+      Count: 3
+      SANS:
+        - localhosts
+    Users:
+      Count: 1

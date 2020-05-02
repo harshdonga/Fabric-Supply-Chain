@@ -1,0 +1,41 @@
+Look into CA later
+registerEnroll.sh
+ccp
+
+
+
+orderer     				:7050
+
+peer0.org1 listen   		:7051
+peer0.org1 chaincode		:7052
+bootstrapped to peer1.org1
+
+peer1.org1 listen           :7061
+peer1.org1 chaincode        :7062
+bootstrapped to peer0.org1
+
+peer0.org2 listen           :8051
+peer0.org2 chaincode        :8052
+bootstrapped to itself
+
+peer0.org3 listen           :9051
+peer0.org3 chaincode        :9052
+bootstrapped to peer1.org3
+
+peer1.org3 listen           :9061
+peer1.org3 chaincode        :9062
+bootstrapped to peer0.org3
+
+peer2.org3 listen           :9071
+peer2.org3 chaincode        :9072
+bootstrapped to peer0.org3
+
+
+ca_org1                     :7054
+ca_org2                     :8054
+ca_org3                     :9054
+ca_orderer                  :10054
+
+
+
+

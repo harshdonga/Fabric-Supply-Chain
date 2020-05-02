@@ -1,0 +1,170 @@
+# Version
+version: 1.2.0
+
+port: 7054
+
+debug: false
+
+crlsizelimit: 512000
+
+tls:
+  enabled: true
+  certfile:
+  keyfile:
+  clientauth:
+    type: noclientcert
+    certfiles:
+
+
+ca:
+  # Name of this CA
+  name: Org3CA
+  keyfile:
+  certfile:
+  chainfile:
+
+
+crl:
+  expiry: 24h
+
+registry:
+  maxenrollments: -1
+
+  identities:
+     - name: admin
+       pass: adminpw
+       type: client
+       affiliation: ""
+       attrs:
+          hf.Registrar.Roles: "*"
+          hf.Registrar.DelegateRoles: "*"
+          hf.Revoker: true
+          hf.IntermediateCA: true
+          hf.GenCRL: true
+          hf.Registrar.Attributes: "*"
+          hf.AffiliationMgr: true
+
+db:
+  type: sqlite3
+  datasource: fabric-ca-server.db
+  tls:
+      enabled: false
+      certfiles:
+      client:
+        certfile:
+        keyfile:
+
+
+ldap:
+   enabled: false
+   url: ldap://<adminDN>:<adminPassword>@<host>:<port>/<base>
+   tls:
+      certfiles:
+      client:
+         certfile:
+         keyfile:
+   attribute:
+      names: ['uid','member']
+      converters:
+         - name:
+           value:
+      maps:
+         groups:
+            - name:
+              value:
+
+# #############################################################################
+# # Affiliations section. Fabric CA server can be bootstrapped with the
+# # affiliations specified in this section. Affiliations are specified as maps.
+# # For example:
+# #   businessunit1:
+# #     department1:
+# #       - team1
+# #   businessunit2:
+# #     - department2
+# #     - department3
+# #
+# # Affiliations are hierarchical in nature. In the above example,
+# # department1 (used as businessunit1.department1) is the child of businessunit1.
+# # team1 (used as businessunit1.department1.team1) is the child of department1.
+# # department2 (used as businessunit2.department2) and department3 (businessunit2.department3)
+# # are children of businessunit2.
+# # Note: Affiliations are case sensitive except for the non-leaf affiliations
+# # (like businessunit1, department1, businessunit2) that are specified in the configuration file,
+# # which are always stored in lower case.
+# #############################################################################
+# affiliations:
+#    org1:
+#       - department1
+#       - department2
+#    org2:
+#       - department1
+
+signing:
+    default:
+      usage:
+        - digital signature
+      expiry: 8760h
+    profiles:
+      ca:
+         usage:
+           - cert sign
+           - crl sign
+         expiry: 43800h
+         caconstraint:
+           isca: true
+           maxpathlen: 0
+      tls:
+         usage:
+            - signing
+            - key encipherment
+            - server auth
+            - client auth
+            - key agreement
+         expiry: 8760h
+
+
+csr:
+   cn: ca.org3.msc.com
+   names:
+      - C: UK
+        ST: "Hampshire"
+        L: "Hursley"
+        O: org3.msc.com
+        OU:
+   hosts:
+     - localhost
+     - org3.msc.com
+   ca:
+      expiry: 131400h
+      pathlength: 1
+
+bccsp:
+    default: SW
+    sw:
+        hash: SHA2
+        security: 256
+        filekeystore:
+            # The directory used for the software file-based keystore
+            keystore: msp/keystore
+
+
+cacount:
+
+cafiles:
+
+intermediate:
+  parentserver:
+    url:
+    caname:
+
+  enrollment:
+    hosts:
+    profile:
+    label:
+
+  tls:
+    certfiles:
+    client:
+      certfile:
+      keyfile:
