@@ -1,5 +1,17 @@
 #!/bin/bash
 
+echo
+echo "  _____________________________________________"
+echo " //                                           //"
+echo " //      _       ______     _       __  __    //"
+echo " //     / \     /_   _/    / \      \ \/ /    //"
+echo " //    / _ \      | |     / _ \      \  /     //"
+echo " //   / ___ \   __| |    / ___ \    / /\ \    //"
+echo " //  /_/   \_\  \___|   /_/   \_\  /_/  \_\   //" 
+echo " //                                           //"
+echo " //___________________________________________//"
+echo
+
 export PATH=${PWD}/../bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
 export VERBOSE=false
