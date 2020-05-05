@@ -30,7 +30,7 @@ setGlobals() {
     CORE_PEER_LOCALMSPID="Org2MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-    CORE_PEER_ADDRESS=peer0.org2.example.com:9051
+    CORE_PEER_ADDRESS=peer0.org2.example.com:8051
   elif [ $ORG -eq 3 ]; then
     CORE_PEER_LOCALMSPID="Org3MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA

@@ -198,6 +198,19 @@ function createOrgs() {
     fi
 
     echo "##########################################################"
+    echo "############ Create Org3 Identities ######################"
+    echo "##########################################################"
+
+    set -x
+    cryptogen generate --config=./organizations/cryptogen/crypto-config-org3.yaml --output="organizations"
+    res=$?
+    set +x
+    if [ $res -ne 0 ]; then
+      echo "Failed to generate certificates..."
+      exit 1
+    fi
+
+    echo "##########################################################"
     echo "############ Create Orderer Org Identities ###############"
     echo "##########################################################"
 
@@ -253,6 +266,12 @@ function createOrgs() {
     createOrg2
 
     echo "##########################################################"
+    echo "############ Create Org2 Identities ######################"
+    echo "##########################################################"
+
+    createOrg3
+
+    echo "##########################################################"
     echo "############ Create Orderer Org Identities ###############"
     echo "##########################################################"
 
@@ -261,7 +280,7 @@ function createOrgs() {
   fi
 
   echo
-  echo "Generate CCP files for Org1 and Org2"
+  echo "Generate CCP files for Org1,Org2 and Org3"
   ./organizations/ccp-generate.sh
 }
 
@@ -305,7 +324,7 @@ function createConsortium() {
   # Note: For some unknown reason (at least for now) the block file can't be
   # named orderer.genesis.block or the orderer will fail to launch!
   set -x
-  configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBlock ./system-genesis-block/genesis.block
+  configtxgen -profile ThreeOrgsOrdererGenesis -channelID system-channel -outputBlock ./system-genesis-block/genesis.block
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -398,6 +417,7 @@ function networkDown() {
     ## remove fabric ca artifacts
     rm -rf organizations/fabric-ca/org1/msp organizations/fabric-ca/org1/tls-cert.pem organizations/fabric-ca/org1/ca-cert.pem organizations/fabric-ca/org1/IssuerPublicKey organizations/fabric-ca/org1/IssuerRevocationPublicKey organizations/fabric-ca/org1/fabric-ca-server.db
     rm -rf organizations/fabric-ca/org2/msp organizations/fabric-ca/org2/tls-cert.pem organizations/fabric-ca/org2/ca-cert.pem organizations/fabric-ca/org2/IssuerPublicKey organizations/fabric-ca/org2/IssuerRevocationPublicKey organizations/fabric-ca/org2/fabric-ca-server.db
+    rm -rf organizations/fabric-ca/org3/msp organizations/fabric-ca/org3/tls-cert.pem organizations/fabric-ca/org3/ca-cert.pem organizations/fabric-ca/org3/IssuerPublicKey organizations/fabric-ca/org3/IssuerRevocationPublicKey organizations/fabric-ca/org3/fabric-ca-server.db    
     rm -rf organizations/fabric-ca/ordererOrg/msp organizations/fabric-ca/ordererOrg/tls-cert.pem organizations/fabric-ca/ordererOrg/ca-cert.pem organizations/fabric-ca/ordererOrg/IssuerPublicKey organizations/fabric-ca/ordererOrg/IssuerRevocationPublicKey organizations/fabric-ca/ordererOrg/fabric-ca-server.db
     rm -rf addOrg3/fabric-ca/org3/msp addOrg3/fabric-ca/org3/tls-cert.pem addOrg3/fabric-ca/org3/ca-cert.pem addOrg3/fabric-ca/org3/IssuerPublicKey addOrg3/fabric-ca/org3/IssuerRevocationPublicKey addOrg3/fabric-ca/org3/fabric-ca-server.db
 
