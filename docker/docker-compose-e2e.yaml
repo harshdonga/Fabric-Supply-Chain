@@ -213,8 +213,8 @@ services:
         - CORE_PEER_LOCALMSPID=Org2MSP
       volumes:
           - /var/run/:/host/var/run/
-          - ../organizations/peerOrganizations/org1.msc.com/peers/peer0.org2.msc.com/msp:/etc/hyperledger/fabric/msp
-          - ../organizations/peerOrganizations/org1.msc.com/peers/peer0.org2.msc.com/tls:/etc/hyperledger/fabric/tls
+          - ../organizations/peerOrganizations/org2.msc.com/peers/peer0.org2.msc.com/msp:/etc/hyperledger/fabric/msp
+          - ../organizations/peerOrganizations/org2.msc.com/peers/peer0.org2.msc.com/tls:/etc/hyperledger/fabric/tls
           - peer0.org2.msc.com:/var/hyperledger/production
       working_dir: /opt/gopath/hyperledger/peer
       command: peer node start
@@ -255,7 +255,7 @@ services:
       working_dir: /opt/gopath/hyperledger/peer
       command: peer node start
       ports:
-        -9051:9051
+        - 9051:9051
       networks:
         - msc     
 
@@ -296,8 +296,8 @@ services:
         - msc     
 
 
-    peer0.org3.msc.com:
-      container_name: peer0.org3.msc.com
+    peer2.org3.msc.com:
+      container_name: peer2.org3.msc.com
       image: hyperledger/fabric-peer:$IMAGE_TAG
       environment:
         - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock

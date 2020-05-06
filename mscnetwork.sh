@@ -12,7 +12,7 @@ echo " //                                           //"
 echo " //___________________________________________//"
 echo
 
-export PATH=${PWD}/../bin:${PWD}:$PATH
+export PATH=${PWD}/./bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
 export VERBOSE=false
 BLACKLISTED_VERSIONS="^1\.0\. ^1\.1\. ^1\.2\. ^1\.3\. ^1\.4\."
@@ -30,7 +30,7 @@ function printHelp() {
   echo "      - 'restart' - restart the network"
   echo
   echo "    Flags:"
-  echo "    -ca <use CAs> -  create Certificate Authorities to generate the crypto material"
+  # echo "    -ca <use CAs> -  create Certificate Authorities to generate the crypto material"
   echo "    -c <channel name> - channel name to use (defaults to \"mychannel\")"
   echo "    -s <dbtype> - the database backend to use: goleveldb (default) or couchdb"
   echo "    -r <max retry> - CLI times out after certain number of attempts (defaults to 5)"
@@ -81,7 +81,7 @@ function removeUnwantedImages() {
 function checkPrereqs() {
   peer version > /dev/null 2>&1
 
-  if [[ $? -ne 0 || ! -d "../config" ]]; then
+  if [[ $? -ne 0 || ! -d "./config" ]]; then
     echo "ERROR! Peer binary and configuration files not found.."
     exit 1
   fi
@@ -241,6 +241,7 @@ function createConsortium() {
   set -x
   configtxgen -profile ThreeOrgsOrdererGenesis -channelID system-channel -outputBlock ./system-genesis-block/genesis.block
   res=$?
+  chmod 664 ./system-genesis-block/genesis.block
   set +x
   if [ $res -ne 0 ]; then
     echo "Failed to generate orderer genesis block..."

@@ -44,7 +44,7 @@ services:
         - ../organizations/ordererOrganizations/msc.com/orderers/orderer.msc.com/tls/:/var/hyperledger/orderer/tls
         - orderer.msc.com:/var/hyperledger/production/orderer
     ports:
-      -7050:7050
+      - 7050:7050
     networks:
       - msc
     
@@ -81,7 +81,7 @@ services:
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -7051:7051
+      - 7051:7051
     networks:
       - msc     
 
@@ -116,7 +116,7 @@ services:
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -7061:7061
+      - 7061:7061
     networks:
       - msc
 
@@ -146,13 +146,13 @@ services:
       - CORE_PEER_LOCALMSPID=Org2MSP
     volumes:
         - /var/run/:/host/var/run/
-        - ../organizations/peerOrganizations/org1.msc.com/peers/peer0.org2.msc.com/msp:/etc/hyperledger/fabric/msp
-        - ../organizations/peerOrganizations/org1.msc.com/peers/peer0.org2.msc.com/tls:/etc/hyperledger/fabric/tls
+        - ../organizations/peerOrganizations/org2.msc.com/peers/peer0.org2.msc.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/org2.msc.com/peers/peer0.org2.msc.com/tls:/etc/hyperledger/fabric/tls
         - peer0.org2.msc.com:/var/hyperledger/production
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -8051:8051
+      - 8051:8051
     networks:
       - msc     
 
@@ -177,7 +177,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
       - CORE_PEER_CHAINCODEADDRESS=peer0.org3.msc.com:9052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org3.msc.com:9061
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.msc.com:9051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.msc.com:9051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -188,7 +188,7 @@ services:
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -9051:9051
+      - 9051:9051
     networks:
       - msc     
 
@@ -224,13 +224,13 @@ services:
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -9061:9061
+      - 9061:9061
     networks:
       - msc     
 
 
-  peer0.org3.msc.com:
-    container_name: peer0.org3.msc.com
+  peer2.org3.msc.com:
+    container_name: peer2.org3.msc.com
     image: hyperledger/fabric-peer:$IMAGE_TAG
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -260,6 +260,6 @@ services:
     working_dir: /opt/gopath/hyperledger/peer
     command: peer node start
     ports:
-      -9071:9071
+      - 9071:9071
     networks:
       - msc
