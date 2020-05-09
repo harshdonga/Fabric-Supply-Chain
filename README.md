@@ -1,2 +1,2 @@
 # Fabric-Supply-Chain
-Say no to counterfiet products!
+Say no to counterfeit products!
