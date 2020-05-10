@@ -358,101 +358,101 @@ chaincodeQuery() {
   fi
 }
 
-# at first we package the chaincode
-# packageChaincode 1 0
-# packageChaincode 1 1
-# packageChaincode 2 0
-# packageChaincode 3 0
-# packageChaincode 3 1
-# packageChaincode 3 2
+at first we package the chaincode
+packageChaincode 1 0
+packageChaincode 1 1
+packageChaincode 2 0
+packageChaincode 3 0
+packageChaincode 3 1
+packageChaincode 3 2
 
-# ## Install chaincode on peer0.org1 and peer0.org2
-# echo "Installing chaincode on peer0.org1..."
-# installChaincode 1 0
-# installChaincode 1 1
+## Install chaincode on peer0.org1 and peer0.org2
+echo "Installing chaincode on peer0.org1..."
+installChaincode 1 0
+installChaincode 1 1
 
-# echo "Install chaincode on peer0.org2..."
-# installChaincode 2 0
+echo "Install chaincode on peer0.org2..."
+installChaincode 2 0
 
-# echo "Install chaincode on peer0.org3..."
-# installChaincode 3 0
-# installChaincode 3 1
-# installChaincode 3 2
-
-
-# ## query whether the chaincode is installed
-# queryInstalled 1 0
-# queryInstalled 1 1
-
-# ## approve the definition for org1
-# approveForMyOrg 1 0
-# # approveForMyOrg 1 1
-
-# ## check whether the chaincode definition is ready to be committed
-# ## expect org1 to have approved and org2 not to
-# checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-# # checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-# checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-# checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-# # checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-# # checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
-
-# ## now approve also for org2
-# approveForMyOrg 2 0
-
-# ## check whether the chaincode definition is ready to be committed
-# ## expect them both to have approved
-# checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
-# # checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
-# checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
-# checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
-# # checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
-# # checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+echo "Install chaincode on peer0.org3..."
+installChaincode 3 0
+installChaincode 3 1
+installChaincode 3 2
 
 
-# ## now approve also for org3
-# approveForMyOrg 3 0
-# # approveForMyOrg 3 1
-# # approveForMyOrg 3 2
+## query whether the chaincode is installed
+queryInstalled 1 0
+queryInstalled 1 1
+
+## approve the definition for org1
+approveForMyOrg 1 0
+# approveForMyOrg 1 1
+
+## check whether the chaincode definition is ready to be committed
+## expect org1 to have approved and org2 not to
+checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+# checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+# checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": false" "\"Org3MSP\": false"
+
+## now approve also for org2
+approveForMyOrg 2 0
+
+## check whether the chaincode definition is ready to be committed
+## expect them both to have approved
+checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+# checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
+# checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": false"
 
 
-# ## check whether the chaincode definition is ready to be committed
-# ## expect them both to have approved
-# checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
-# # checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
-# checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
-# checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
-# # checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
-# # checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+## now approve also for org3
+approveForMyOrg 3 0
+# approveForMyOrg 3 1
+# approveForMyOrg 3 2
+
+
+## check whether the chaincode definition is ready to be committed
+## expect them both to have approved
+checkCommitReadiness 1 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+checkCommitReadiness 2 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+checkCommitReadiness 3 0 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+# checkCommitReadiness 3 1 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
+# checkCommitReadiness 3 2 "\"Org1MSP\": true" "\"Org2MSP\": true" "\"Org3MSP\": true"
 
 
 
-# # now that we know for sure all orgs have approved, commit the definition
-# commitChaincodeDefinition 1 0 1 1 2 0 3 0 3 1 3 2
-# # commitChaincodeDefinition 1 1
-# # commitChaincodeDefinition 2 0
-# # commitChaincodeDefinition 3 0
-# # commitChaincodeDefinition 3 1
-# # commitChaincodeDefinition 3 2
+# now that we know for sure all orgs have approved, commit the definition
+commitChaincodeDefinition 1 0 1 1 2 0 3 0 3 1 3 2
+# commitChaincodeDefinition 1 1
+# commitChaincodeDefinition 2 0
+# commitChaincodeDefinition 3 0
+# commitChaincodeDefinition 3 1
+# commitChaincodeDefinition 3 2
 
-# # query on both orgs to see that the definition committed successfully
-# queryCommitted 1 0
-# queryCommitted 1 1
-# queryCommitted 2 0
-# queryCommitted 3 0
-# queryCommitted 3 1
-# queryCommitted 3 2
+# query on both orgs to see that the definition committed successfully
+queryCommitted 1 0
+queryCommitted 1 1
+queryCommitted 2 0
+queryCommitted 3 0
+queryCommitted 3 1
+queryCommitted 3 2
 
-# ## Invoke the chaincode
-# chaincodeInvokeInit 1 0 1 1 2 0 3 0 3 1 3 2
-# # chaincodeInvokeInit 1 1
-# # chaincodeInvokeInit 2 0
-# # chaincodeInvokeInit 3 0
-# # chaincodeInvokeInit 3 1
-# # chaincodeInvokeInit 3 2
+## Invoke the chaincode
+chaincodeInvokeInit 1 0 1 1 2 0 3 0 3 1 3 2
+# chaincodeInvokeInit 1 1
+# chaincodeInvokeInit 2 0
+# chaincodeInvokeInit 3 0
+# chaincodeInvokeInit 3 1
+# chaincodeInvokeInit 3 2
 
 
-# sleep 10
+sleep 10
 
 # Query chaincode on peer0.org1
 echo "Querying chaincode on peer0.org1..."
