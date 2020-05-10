@@ -49,7 +49,7 @@ createAncorPeerTx() {
 }
 
 createChannel() {
-	setGlobals 1
+	setGlobals 1 0
 	# Poll in case the raft leader is not set yet
 	local rc=1
 	local COUNTER=1
@@ -71,28 +71,30 @@ createChannel() {
 
 # queryCommitted ORG
 joinChannel() {
-  ORG=$1
-  setGlobals $ORG
+#   ORG=$1
+#   PEER = $2
+  	setGlobals $1 $2
 	local rc=1
 	local COUNTER=1
 	## Sometimes Join takes time, hence retry
 	while [ $rc -ne 0 -a $COUNTER -lt $MAX_RETRY ] ; do
-    sleep $DELAY
-    set -x
-    peer channel join -b ./channel-artifacts/$CHANNEL_NAME.block >&log.txt
-    res=$?
-    set +x
+		sleep $DELAY
+		set -x
+		peer channel join -b ./channel-artifacts/$CHANNEL_NAME.block >&log.txt
+		res=$?
+		set +x
 		let rc=$res
 		COUNTER=$(expr $COUNTER + 1)
 	done
 	cat log.txt
 	echo
-	verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME' "
+	verifyResult $res "After $MAX_RETRY attempts, peer$2.org$1 has failed to join channel '$CHANNEL_NAME' "
 }
 
 updateAnchorPeers() {
   ORG=$1
-  setGlobals $ORG
+  PEER=$2
+  setGlobals $ORG $PEER
 	local rc=1
 	local COUNTER=1
 	## Sometimes Join takes time, hence retry
@@ -134,23 +136,28 @@ FABRIC_CFG_PATH=$PWD/../config/
 
 ## Create channel
 echo "Creating channel "$CHANNEL_NAME
-createChannel
+createChannel 1
+# createChannel 2
+# createChannel 3
 
 ## Join all the peers to the channel
 echo "Join Org1 peers to the channel..."
-joinChannel 1
+joinChannel 1 0
+joinChannel 1 1 
 echo "Join Org2 peers to the channel..."
-joinChannel 2
+joinChannel 2 0
 echo "Join Org3 peers to the channel..."
-joinChannel 3
+joinChannel 3 0
+joinChannel 3 1
+joinChannel 3 2
 
 ## Set the anchor peers for each org in the channel
 echo "Updating anchor peers for org1..."
-updateAnchorPeers 1
+updateAnchorPeers 1 0
 echo "Updating anchor peers for org2..."
-updateAnchorPeers 2
+updateAnchorPeers 2 0
 echo "Updating anchor peers for org2..."
-updateAnchorPeers 3
+updateAnchorPeers 3 0
 
 echo
 echo "========= Channel successfully joined =========== "
