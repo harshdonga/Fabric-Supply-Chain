@@ -458,7 +458,7 @@ VERSION=1
 # default image tag
 IMAGETAG="latest"
 # default database
-DATABASE="leveldb"
+DATABASE="couchdb"
 
 # Parse commandline args
 
