@@ -5,3 +5,5 @@
 ./network.sh createChannel -c mychannel
 ./network.sh deployCC -l javascript
 ```
+## View Database after running above commands here
+http://localhost:5984/_utils/

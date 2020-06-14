@@ -358,7 +358,7 @@ chaincodeQuery() {
   fi
 }
 
-at first we package the chaincode
+# at first we package the chaincode
 packageChaincode 1 0
 packageChaincode 1 1
 packageChaincode 2 0
